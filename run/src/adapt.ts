@@ -4,12 +4,12 @@ export interface AdaptStream {
   (s: Stream<any>): any;
 }
 
-let adaptStream: AdaptStream = x => x;
+(global as any).adaptStream = (x => x) as AdaptStream;
 
 export function setAdapt(f: AdaptStream): void {
-  adaptStream = f;
+  (global as any).adaptStream = f;
 }
 
 export function adapt(stream: Stream<any>): any {
-  return adaptStream(stream);
+  return (global as any).adaptStream(stream);
 }
